@@ -2,19 +2,22 @@ class Mathjax::Rails::MathjaxRailsController < ActionController::Base
   def giveOutStaticFile
     ext = ''
     ext = ".#{params[:format]}" if params[:format]
-    filename = params[:uri]+ext
-    filepath = "../../../../vendor/#{Mathjax::Rails::DIRNAME}/#{filename}"
+    filename = "#{params[:uri]}#{ext}"
 
-    extname = File.extname(filename)[1..-1]
-    mime_type = Mime::Type.lookup_by_extension(extname)
-    options = Hash.new
-    options[:type] = mime_type.to_s unless mime_type.nil?
-    options[:disposition] = 'inline'
-    file = File.expand_path(filepath, __FILE__)
-    if File.exists?(file)
+    clean_path = Pathname.new(filename).cleanpath.to_s
+    return head :not_found if clean_path != filename
+
+    file = File.join(__dir__, '..', '..', '..', 'vendor', Mathjax::Rails::DIRNAME, filename)
+    if File.exist?(file)
+      extname = File.extname(filename)[1..-1]
+      mime_type = Mime::Type.lookup_by_extension(extname)
+
+      options = {disposition: 'inline'}
+      options[:type] = mime_type.to_s unless mime_type.nil?
+
       send_file file, options
     else
-      render :status => 404
+      head :not_found
     end
   end
 end
