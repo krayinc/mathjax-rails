@@ -1,8 +1,8 @@
 /*************************************************************
  *
- *  MathJax/jax/output/SVG/fonts/TeX/svg/Main/Italic/MathOperators.js
+ *  MathJax/localization/diq/HelpDialog.js
  *
- *  Copyright (c) 2011-2015 The MathJax Consortium
+ *  Copyright (c) 2009-2020 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@
  *  limitations under the License.
  *
  */
+MathJax.Localization.addTranslation("diq","HelpDialog",{
+        version: "2.7.9",
+        isLoaded: true,
+        strings: {
 
-MathJax.Hub.Insert(
-  MathJax.OutputJax.SVG.FONTDATA.FONTS['MathJax_Main-italic'],
-  {
-    // INCREMENT
-    0x2206: [716,0,818,70,751,'']
-  }
-);
+        }
+});
 
-MathJax.Ajax.loadComplete(MathJax.OutputJax.SVG.fontDir+"/Main/Italic/MathOperators.js");
+MathJax.Ajax.loadComplete("[MathJax]/localization/diq/HelpDialog.js");
